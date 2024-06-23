@@ -4,6 +4,11 @@ vim.g.mapleader = ' '
 vim.opt.clipboard = 'unnamedplus'
 vim.cmd("set number")
 vim.cmd("set relativenumber")
+vim.o.autoread = true
+vim.cmd([[
+  autocmd FocusGained,BufEnter * checktime
+]])
+vim.o.shortmess = vim.o.shortmess .. 'c'
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
@@ -21,6 +26,8 @@ require('lazy').setup("plugins")
 
 -- keybindings
 -- vim.keymap.set('n', '<leader>ft', function() vim.cmd('Neotree toggle') end)
+
+-- keybindings for cp
 vim.cmd('set makeprg=g++\\ %\\ -o\\ %<')
 vim.cmd([[
   command! RunProgram execute ':!./%< < input.txt > output.txt'
