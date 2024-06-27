@@ -33,5 +33,12 @@ vim.cmd([[
   command! RunProgram execute ':!./%< < input.txt > output.txt'
 ]])
 
+vim.cmd([[
+  command! RunPython execute ':!python3 % < input.txt > output.txt'
+]])
+
 vim.api.nvim_set_keymap('n', '<leader>make', ':make<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>run', ':RunProgram<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-p>', ':bp', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>run', ':RunProgram<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>run', ':RunPython<CR>', { noremap = true, silent = true })
