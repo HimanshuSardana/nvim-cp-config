@@ -21,3 +21,11 @@ local builtin = require('telescope.builtin')
 keymap.set('n', '<leader>ff', builtin.find_files, {})
 keymap.set('n', '<leader>lg', builtin.live_grep, {})
 keymap.set('n', '<leader>fb', builtin.buffers, {})
+
+--   ____ ______  
+-- _/ ___\\____ \ 
+-- \  \___|  |_> >
+--  \___  >   __/ 
+--      \/|__|    
+require('config.cp')
+keymap.set('n', '<leader>rc', ':RunCode<CR>')
