@@ -18,3 +18,13 @@ vim.api.nvim_exec(
 ]],
 	false
 )
+
+function make_and_run()
+	os.execute("make && ./main")
+end
+
+vim.api.nvim_create_user_command('MakeRun', function()
+	vim.cmd('!make && ./main')
+end, {})
+
+

@@ -7,6 +7,25 @@
 
 return {
 	{
+		"OXY2DEV/markview.nvim",
+		lazy = false,
+
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons"
+		},
+		config = function()
+			local markview = require("markview");
+			local presets = require("markview.presets");
+			require("markview").setup({
+				headings = presets.headings.glow_labels
+			})
+		end
+	},
+	{
+		'nvim-telescope/telescope-ui-select.nvim'
+	},
+	{
 		-- barbeque (bar at top)
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
@@ -53,7 +72,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("lualine").setup()
+			require('lualine').setup()
 		end,
 	},
 	{
@@ -112,10 +131,39 @@ return {
 			},
 		},
 	},
+	-- {
+	-- 	"m4xshen/hardtime.nvim",
+	-- 	config = function()
+	-- 		require("hardtime").setup()
+	-- 	end,
+	-- },
 	{
-		"m4xshen/hardtime.nvim",
+		"kevinhwang91/nvim-ufo",
 		config = function()
-			require("hardtime").setup()
+			vim.o.foldcolumn = '0' -- '0' is not bad
+			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+			vim.keymap.set('n', 'zo', require('ufo').openAllFolds)
+			vim.keymap.set('n', 'zc', require('ufo').closeAllFolds)
 		end,
+
 	},
+	{
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end
+	},
+	{
+		"ellisonleao/carbon-now.nvim",
+		lazy = true,
+		cmd = "CarbonNow",
+		---@param opts cn.ConfigSchema
+	}
+
 }

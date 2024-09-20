@@ -1,65 +1,41 @@
 return {
 	{
-		
-		'williamboman/mason.nvim',
+		'junnplus/lsp-setup.nvim',
+		dependencies = {
+			'neovim/nvim-lspconfig',
+			'williamboman/mason.nvim', -- optional
+			'williamboman/mason-lspconfig.nvim', -- optional
+		},
 		config = function()
-			require("mason").setup({
-				ui = {
-					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
-					},
-				},
-			})
-		end
-	},
-	{ 
-		'williamboman/mason-lspconfig.nvim', 
-		config = function()
-			require('mason-lspconfig').setup({})	
-		end
-	},
-	{
-		'neovim/nvim-lspconfig', 
-		config = function()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			local lspconfig = require 'lspconfig'
-			local on_attach = function(_, bufnr)
-				local attach_opts = { silent = true, buffer = bufnr }
-				vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, attach_opts)
-				vim.keymap.set('n', 'gd', vim.lsp.buf.definition, attach_opts)
-				vim.keymap.set('n', 'K', vim.lsp.buf.hover, attach_opts)
-				vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, attach_opts)
-				vim.keymap.set('n', '<C-s>', vim.lsp.buf.signature_help, attach_opts)
-				vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, attach_opts)
-				vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, attach_opts)
-				vim.keymap.set('n', '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, attach_opts)
-				vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, attach_opts)
-				vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, attach_opts)
-				vim.keymap.set('n', 'so', require('telescope.builtin').lsp_references, attach_opts)
-			end
+			require('lsp-setup').setup({
+				-- on_attach = function(client, bufnr)
+				-- 	-- Support custom the on_attach function for global
+				-- 	-- Formatting on save as default
+				-- 	require('lsp-setup.utils').format_on_save(client)
+				-- end,
+				-- Global capabilities
 
-			local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'gopls'}
-			for _, lsp in ipairs(servers) do
-				lspconfig[lsp].setup {
-					on_attach = on_attach,
-					capabilities = capabilities,
+				servers = {
+					['lua_ls'] = {},
+					['clangd'] = {},
+					["texlab"] = {},
+					['tsserver'] = {},
+					["astro-language-server"] = {},
+					["gopls"] = {},
+					["tailwindcss"] = {},
+					['emmet_language_server'] = {},
+					["pyright"] = {},
+					["svelte"] = {},
+					["cssls"] = {},
+					["bashls"] = {},
+					["markdown_oxide"] = {},
+				},
+				mappings = {
+					gd = 'lua require"telescope.builtin".lsp_definitions()',
+					gi = 'lua require"telescope.builtin".lsp_implementations()',
+					gr = 'lua require"telescope.builtin".lsp_references()',
 				}
-			end
-
-
-			lspconfig.lua_ls.setup {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						completion = {
-							callSnippet = 'Replace',
-						},
-					},
-				},
-			}
+			})
 		end
 	}
 }

@@ -1,7 +1,7 @@
 return {
-	{"navarasu/onedark.nvim", 
+	"rebelot/kanagawa.nvim",
 	config = function()
-		require('onedark').load()
+		require("kanagawa").setup()
+		vim.cmd("colorscheme kanagawa-wave")
 	end
-	}
 }
