@@ -18,7 +18,6 @@ function run_code()
 			run_in_terminal(output)
 		end
 	elseif extension == "cpp" then
-		-- Compile and run C++ code
 		local compile_cmd = string.format("g++ %s -o %s 2>&1", filename, output)
 		local compile_result = vim.fn.system(compile_cmd)
 
@@ -30,11 +29,12 @@ function run_code()
 			run_in_terminal(output)
 		end
 	elseif extension == "py" then
-		-- Run Python script in a terminal
 		local run_cmd = string.format("python3 %s", filename)
 		run_in_terminal(run_cmd)
+	elseif extension == "go" then
+		local run_cmd = string.format("go run %s", filename)
+		run_in_terminal(run_cmd)
 	else
-		-- Unsupported file type
 		show_floating_output("Unsupported file type: " .. extension)
 	end
 end
