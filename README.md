@@ -1,4 +1,4 @@
-# nvim-cp-config
+#nvim-cp-config
 A modular and modern Neovim config geared towards competitive programming 
 
 ### Setup
@@ -7,4 +7,7 @@ git clone https://github.com/HimanshuSardana/nvim-cp-config ~/.config/nvim
 ```
 
 ### CP Shortcuts
-The config allows for running python and cpp scripts via the :RunCode command, it reads the stdin from an `input.txt` file and writes the STDOUT to an `output.txt` file
+Allows running C, C++ and Python files with the keybind `<leader>RC`
+Default `leader` key is ` `
+
+Also allows running python code snippets from markdown files using `magma.nvim` with the keybind `<Shift-I>` in normal mode for single line evaluation and in visual mode for multi-line evaluation.
